@@ -23,7 +23,7 @@ Run `yarn build` to build the project. The build artifacts will be stored in the
 Tests are not yet implemented due to lack of time.
 
 ## Demo
-You will find a Demo or the working project [here](https://*.herokuapp.com)
+You will find a Demo or the working project [here](https://nobo-e7f56.firebaseapp.com/)
 
 ## Other details
 Don't hesitate to put any comment here 😉.
