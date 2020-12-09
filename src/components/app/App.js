@@ -17,12 +17,8 @@ const App =()=> {
         <CssBaseline />
         <Header />
         <Switch>
-          <Route path={`/movie/:movieId`}>
-            <DetailsMovie />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route path="/" exact component={Home} />
+          <Route path="/movie/:movieId" component={DetailsMovie} />
         </Switch>
         <Footer />
       </Fragment>
