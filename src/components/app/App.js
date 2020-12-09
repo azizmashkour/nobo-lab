@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import DetailsMovie from '../DetailsMovie';
+import Details from '../movies/Details';
 import Footer from '../layouts/Footer';
 import Header from '../layouts/Header';
-import Home from '../Home';
+import List from '../movies/List';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,8 +17,8 @@ const App =()=> {
         <CssBaseline />
         <Header />
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/movie/:movieId" component={DetailsMovie} />
+          <Route path="/" exact component={List} />
+          <Route path="/movie/:movieId" component={Details} />
         </Switch>
         <Footer />
       </Fragment>

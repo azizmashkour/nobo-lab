@@ -8,11 +8,11 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link, useRouteMatch } from "react-router-dom";
-import { useStyles } from './shared/styles';
-import { searchMovies } from '../services/Http';
-import { MOVIE_PLACEHOLDER_URL } from '../constants/commons';
+import { useStyles } from '../shared/styles';
+import { searchMovies } from '../../services/Http';
+import { MOVIE_PLACEHOLDER_URL } from '../../constants/commons';
 
-const Home =()=> {
+const List =()=> {
   let matchRoute = useRouteMatch();
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
@@ -131,4 +131,4 @@ const Home =()=> {
   );
 };
 
-export default Home;
+export default List;
