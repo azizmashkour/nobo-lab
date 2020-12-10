@@ -9,7 +9,7 @@ import Container from '@material-ui/core/Container';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link, useRouteMatch } from "react-router-dom";
 import { useStyles } from '../shared/styles';
-import { searchMovies } from '../../services/Http';
+import { searchMovies } from '../../services/HttpClient';
 import { MOVIE_PLACEHOLDER_URL } from '../../constants/commons';
 
 const List =()=> {
@@ -79,6 +79,7 @@ const List =()=> {
             component="h2"
             className={classes.cardContentCenter}
           >
+
             Chargement...
           </Typography>}
         { !loading && <>
@@ -100,7 +101,7 @@ const List =()=> {
                     <Card className={classes.card}>
                       <CardMedia
                         className={classes.cardMedia}
-                        image={movie.show.image ? movie.show.image.medium : MOVIE_PLACEHOLDER_URL }
+                        image={movie.show.image ? movie.show.image.original : MOVIE_PLACEHOLDER_URL }
                         title={movie.show.name}
                       />
                       <CardContent className={classes.cardContent}>

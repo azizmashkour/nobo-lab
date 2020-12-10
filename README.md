@@ -1,4 +1,4 @@
-# Data analysis
+# Movies gallery
 
 This project was generated with [Create React apps with no build configuration](https://github.com/facebook/create-react-app)
 

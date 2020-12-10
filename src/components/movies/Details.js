@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import Container from '@material-ui/core/Container';
 import { Link, useParams } from "react-router-dom";
-import { findMovie } from '../../services/Http';
+import { findMovie } from '../../services/HttpClient';
 import Button from '@material-ui/core/Button';
 import { useStyles } from '../shared/styles';
 import Card from '@material-ui/core/Card';
