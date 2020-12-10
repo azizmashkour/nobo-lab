@@ -1,16 +1,19 @@
 import React,  {useState, useEffect } from 'react';
-import Card from '@material-ui/core/Card';
+import { environment as env } from '../../environments/env.dev';
+import ErrorHandler from '../ui/error-handler/ErrorHandler';
+import { searchMovies } from '../../services/HttpClient';
 import CardContent from '@material-ui/core/CardContent';
+import { Link, useRouteMatch } from "react-router-dom";
+import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import InputBase from '@material-ui/core/InputBase';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import SearchIcon from '@material-ui/icons/Search';
-import { Link, useRouteMatch } from "react-router-dom";
+import NoResult from '../ui/no-result/NoResult';
 import { useStyles } from '../shared/styles';
-import { searchMovies } from '../../services/HttpClient';
-import { MOVIE_PLACEHOLDER_URL } from '../../constants/commons';
+import Loading from '../ui/loaders/Loading';
+import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
 
 const List =()=> {
   let matchRoute = useRouteMatch();
@@ -72,27 +75,9 @@ const List =()=> {
         </Container>
       </div>
       <Container className={classes.cardGrid} maxWidth="md">
-        { loading &&
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="h2"
-            className={classes.cardContentCenter}
-          >
-
-            Chargement...
-          </Typography>}
+        { loading && <Loading message="Chargement..." /> }
         { !loading && <>
-          { errorGetMovies &&
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h2"
-              className={classes.cardContentCenter}
-            >
-              {errorGetMovies}
-            </Typography>
-          }
+          { errorGetMovies && <ErrorHandler message={errorGetMovies} /> }
           { !errorGetMovies &&
             <Grid container spacing={4}>
               {movies.map((movie) => (
@@ -101,7 +86,7 @@ const List =()=> {
                     <Card className={classes.card}>
                       <CardMedia
                         className={classes.cardMedia}
-                        image={movie.show.image ? movie.show.image.original : MOVIE_PLACEHOLDER_URL }
+                        image={movie.show.image ? movie.show.image.original : env.MOVIE_PLACEHOLDER_URL }
                         title={movie.show.name}
                       />
                       <CardContent className={classes.cardContent}>
@@ -114,15 +99,7 @@ const List =()=> {
                   </Link>
                 </Grid>
               ))}
-              {!movies.length &&
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="h2"
-                  className={classes.cardContentCenter}
-                >
-                  Aucun film ne correspond à votre recherche.
-                </Typography>}
+              { !movies.length && <NoResult message="Aucun film ne correspond à votre recherche." /> }
             </Grid>
           }
           </>

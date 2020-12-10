@@ -1,14 +1,18 @@
 import React,  {useState, useEffect } from 'react';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import { MOVIE_PLACEHOLDER_URL } from '../../constants/commons';
+import { environment as env } from '../../environments/env.dev';
+import ErrorHandler from '../ui/error-handler/ErrorHandler';
 import CardContent from '@material-ui/core/CardContent';
+import { findMovie } from '../../services/HttpClient';
 import Typography from '@material-ui/core/Typography';
+import { navigation } from '../../constants/configs';
 import CardMedia from '@material-ui/core/CardMedia';
 import Container from '@material-ui/core/Container';
 import { Link, useParams } from "react-router-dom";
-import { findMovie } from '../../services/HttpClient';
+import NoResult from '../ui/no-result/NoResult';
 import Button from '@material-ui/core/Button';
 import { useStyles } from '../shared/styles';
+import Loading from '../ui/loaders/Loading';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -49,29 +53,12 @@ const Details =()=> {
             size="large"
             startIcon={<KeyboardBackspaceIcon />}
           >
-            <Link to="/" className={classes.link}>Retour aux films</Link>
+            <Link to={navigation.home} className={classes.link}>Retour aux films</Link>
           </Button>
         </Box>
-        { loading &&
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="h2"
-            className={classes.cardContentCenter}
-          >
-            Chargement...
-          </Typography>}
+        { loading && <Loading message="Chargement..." /> }
         { !loading && <>
-          { errorGetMovie &&
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h2"
-              className={classes.cardContentCenter}
-            >
-              {errorGetMovie}
-            </Typography>
-          }
+          { errorGetMovie && <ErrorHandler message={errorGetMovies} /> }
           { !errorGetMovie &&
             <Grid container spacing={4}>
               { movie &&
@@ -79,7 +66,7 @@ const Details =()=> {
                   <Grid item xs={12} sm={6} md={6}>
                     <CardMedia
                       className={classes.cardMedia}
-                      image={movie.image ? movie.image.original : MOVIE_PLACEHOLDER_URL }
+                      image={movie.image ? movie.image.original : env.MOVIE_PLACEHOLDER_URL }
                       title={movie.name}
                     />
                   </Grid>
@@ -98,16 +85,7 @@ const Details =()=> {
                   </Grid>
                 </>
               }
-              {!movie &&
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="h2"
-                  className={classes.cardContentCenter}
-                >
-                  Le film n'a pas été retrouvé.
-                </Typography>
-              }
+              {!movie && <NoResult message="Le film n'a pas été retrouvé." />}
             </Grid>
           }
           </>
