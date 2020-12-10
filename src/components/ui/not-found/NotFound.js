@@ -1,7 +1,7 @@
 import React from "react";
 
 const NotFound =()=> {
-  {/* no need to create a style file just fir 3 line, so we use styled component */}
+  {/* no need to create a style file just for 3 lines, so we use a styled component */}
   const divStyle = {
     textAlign: 'center',
     fontSize: '7rem',
